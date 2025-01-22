@@ -1,0 +1,116 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #6ab04c, #badc58);
+    animation: backgroundAnimation 5s ease infinite alternate;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header.fade-in {
+    animation: fadeIn 2s ease-in-out;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: #4CAF50;
+    transform: scale(1.1);
+}
+
+.container, .how-to-section {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    animation: slideIn 1.5s ease-in-out;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    background: linear-gradient(to bottom, #4CAF50, #388e3c);
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #45a049;
+    transform: scale(1.1);
+}
+
+.animated-button {
+    animation: pulse 2s infinite;
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    display: inline-block;
+    animation: fadeIn 1.5s ease;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes backgroundAnimation {
+    0% { background: linear-gradient(to bottom right, #6ab04c, #badc58); }
+    100% { background: linear-gradient(to bottom right, #22a6b3, #7ed6df); }
+}
