@@ -1,77 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A tool to reduce image size with a great user experience">
-    <title>Reducepic - Home</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compress images online without losing quality. Free and easy-to-use tool for reducing image size. Supports JPEG, PNG, WebP, and more.">
+  <meta name="keywords" content="compress image online, reduce image size, free image compressor, image size reducer">
+  <meta name="author" content="Your Company">
+  <title>Image Reduce - Compress Images Online for Free</title>
+  <link rel="canonical" href="https://yourwebsite.com">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f4f4f9;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    .dark-mode-toggle {
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Body */
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    body.dark-mode .container {
+      background: #2c2c2c;
+    }
+
+    .upload-box {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .upload-box:hover {
+      border-color: #007bff;
+    }
+
+    .preview-img {
+      max-width: 100px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .processing {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .progress-circle {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ccc;
+      border-top: 5px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .compressed-img {
+      max-width: 100px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .stats {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .reduce-size {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .reduce-size input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .reduce-size button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .download-share {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .download-share button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: #007bff;
+      color: white;
+      text-align: center;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <header class="fade-in">
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="container fade-in">
-            <!-- Upload Picture Section -->
-            <h2>Upload Picture</h2>
-            <input type="file" id="fileInput" accept="image/*" aria-label="Upload your picture">
-            
-            <!-- Resize in Percentage Section -->
-            <h2>Resize in Percentage</h2>
-            <div class="resize-section">
-                <label for="resizeInput">Percent of Size:</label>
-                <input type="number" id="resizeInput" placeholder="Enter percentage (e.g., 1 to 99)" aria-label="Enter resize percentage">
-            </div>
-            
-            <!-- Process Button -->
-            <button id="resizeBtn" class="animated-button">Process</button>
-            
-            <!-- Image Preview Section -->
-            <div id="imagePreview" class="fade-in" style="display:none;">
-                <h3>Uploaded Image</h3>
-                <div class="image-preview" id="uploadedImagePreview">
-                    <img id="uploadedImage" src="" alt="Uploaded Image">
-                </div>
-            </div>
-            
-            <!-- Result Section -->
-            <div id="result" class="result fade-in">
-                <h3>Resized Image</h3>
-                <div class="image-preview" id="resizedImagePreview">
-                    <img id="resizedImage" src="" alt="Resized Image">
-                </div>
-                <p id="finalSize"></p>
-                <a id="downloadBtn" href="#" download="reducepic.jpg">
-                    <button class="animated-button">Download Resized Image</button>
-                </a>
-            </div>
-            
-            <!-- Error Message Section -->
-            <div class="info" id="errorMessage"></div>
-        </div>
+  <!-- Header -->
+  <header>
+    <h1>Image Reduce</h1>
+    <div>
+      <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+      <div class="hamburger" onclick="toggleNav()">☰</div>
+    </div>
+  </header>
 
-        <!-- Detailed Explanation Section -->
-        <div class="how-to-section fade-in">
-            <h2>How to Reduce Picture</h2>
-            <p>Follow the steps below to reduce the size of your picture:</p>
-            <ol>
-                <li>Click on the "Choose File" button to upload your picture.</li>
-                <li>Enter the percentage by which you want to reduce the picture size.</li>
-                <li>Click on the "Process Now" button to resize the picture.</li>
-                <li>Preview the resized picture and download it if you are satisfied with the result.</li>
-            </ol>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Reducepic</p>
-    </footer>
-    <script src="script.js" defer></script>
+  <!-- Body -->
+  <div class="container">
+    <h2>Reduce Image Free</h2>
+    <div class="upload-box" id="uploadBox">
+      <p>Upload your image</p>
+      <input type="file" id="fileInput" accept="image/*" style="display: none;">
+    </div>
+    <img id="preview" class="preview-img" alt="Preview">
+    <p id="imageSize"></p>
+    <button onclick="compressImage()">Get Same Quality</button>
+    <div class="reduce-size" id="reduceSize">
+      <input type="number" id="sizeInput" placeholder="Enter size in KB">
+      <button onclick="reduceBySize()">Reduce Now</button>
+    </div>
+    <div class="processing" id="processing">
+      <div class="progress-circle"></div>
+      <p id="progressText">Compressing...</p>
+    </div>
+    <img id="compressedImg" class="compressed-img" alt="Compressed Image">
+    <p id="stats" class="stats"></p>
+    <div class="download-share">
+      <button id="downloadButton" style="display: none;">Download Now</button>
+      <button onclick="shareOnFacebook()">Share on Facebook</button>
+      <button onclick="shareOnInstagram()">Share on Instagram</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <h3>How to Use</h3>
+    <ul>
+      <li>Upload your image by clicking or dragging it into the box.</li>
+      <li>Choose to compress without losing quality or reduce by size.</li>
+      <li>Download or share your compressed image.</li>
+    </ul>
+    <h3>Why Compress Images?</h3>
+    <ul>
+      <li>Reduce file size for faster website loading.</li>
+      <li>Save storage space on your device.</li>
+      <li>Easily share images on social media.</li>
+    </ul>
+    <p>© 2025 Compression Image. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadBox = document.getElementById('uploadBox');
+    const preview = document.getElementById('preview');
+    const imageSize = document.getElementById('imageSize');
+    const reduceSize = document.getElementById('reduceSize');
+    const processing = document.getElementById('processing');
+    const compressedImg = document.getElementById('compressedImg');
+    const stats = document.getElementById('stats');
+    const downloadButton = document.getElementById('downloadButton');
+
+    let originalFile, compressedBlob;
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    // File Upload Handling
+    uploadBox.addEventListener('click', () => fileInput.click());
+    uploadBox.addEventListener('dragover', (e) => e.preventDefault());
+    uploadBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      handleFile(file);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      handleFile(file);
+    });
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file.');
+        return;
+      }
+
+      originalFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        imageSize.textContent = `Image Size: ${(file.size / 1024).toFixed(2)} KB`;
+        reduceSize.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function compressImage() {
+      if (!originalFile) return;
+
+      processing.style.display = 'block';
+      const img = new Image();
+      img.src = URL.createObjectURL(originalFile);
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(
+          (blob) => {
+            compressedBlob = blob;
+            compressedImg.src = URL.createObjectURL(blob);
+            compressedImg.style.display = 'block';
+            downloadButton.style.display = 'block';
+
+            const originalSize = (originalFile.size / 1024).toFixed(2);
+            const compressedSize = (blob.size / 1024).toFixed(2);
+            const sizeReduction = (((originalSize - compressedSize) / originalSize) * 100).toFixed(2);
+
+            stats.textContent = `Size reduced by ${sizeReduction}% (${originalSize} KB → ${compressedSize} KB)`;
+            processing.style.display = 'none';
+          },
+          'image/jpeg',
+          0.8 // Quality (0.8 = 80%)
+        );
+      };
+    }
+
+    function reduceBySize() {
+      const targetSize = parseFloat(document.getElementById('sizeInput').value);
+      if (!targetSize || !originalFile) return;
+
+      processing.style.display = 'block';
+      const img = new Image();
+      img.src = URL.createObjectURL(originalFile);
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let quality = 0.8;
+        let blob;
+
+        const compress = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob(
+            (b) => {
+              blob = b;
+              const compressedSize = (blob.size / 1024).toFixed(2);
+
+              if (compressedSize > targetSize && quality > 0.1) {
+                quality -= 0.1;
+                compress();
+              } else {
+                compressedBlob = blob;
+                compressedImg.src = URL.createObjectURL(blob);
+                compressedImg.style.display = 'block';
+                downloadButton.style.display = 'block';
+
+                const originalSize = (originalFile.size / 1024).toFixed(2);
+                const sizeReduction = (((originalSize - compressedSize) / originalSize) * 100).toFixed(2);
+
+                stats.textContent = `Size reduced by ${sizeReduction}% (${originalSize} KB → ${compressedSize} KB)`;
+                processing.style.display = 'none';
+              }
+            },
+            'image/jpeg',
+            quality
+          );
+        };
+
+        compress();
+      };
+    }
+
+    // Download Compressed Image
+    downloadButton.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(compressedBlob);
+      link.download = `compressed-${originalFile.name}`;
+      link.click();
+    });
+
+    // Share on Social Media
+    function shareOnFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+
+    function shareOnInstagram() {
+      alert('Instagram sharing is not supported directly. Download the image and share it manually.');
+    }
+  </script>
 </body>
 </html>
